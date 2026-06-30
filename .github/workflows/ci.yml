@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-test:
+    name: Build, test & clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The `sdl2` crate links the native SDL2 library, so it must be present
+      # for the binary targets to build (even though the unit tests are pure).
+      - name: Install SDL2
+        run: sudo apt-get update && sudo apt-get install -y libsdl2-dev
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - name: Cache cargo build
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --all-targets --verbose
+
+      - name: Test
+        run: cargo test --verbose
+
+      # Clippy runs but does not fail the build on lint warnings yet. Tighten to
+      # `-- -D warnings` once the codebase is lint-clean if you want it strict.
+      - name: Clippy
+        run: cargo clippy --all-targets
+
+      # Formatting check is informational for now (won't fail the job).
+      - name: Rustfmt
+        run: cargo fmt --all -- --check
+        continue-on-error: true
