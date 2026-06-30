@@ -1,0 +1,21 @@
+[package]
+name = "c64emu"
+version = "0.1.0"
+edition = "2021"
+default-run = "c64emu"
+description = "A Commodore 64 emulator in Rust, targeting real D64/PRG game playback."
+license = "MIT"
+authors = ["Andrew Baxter"]
+keywords = ["emulator", "commodore", "c64", "6502", "retro"]
+categories = ["emulators"]
+readme = "README.md"
+
+[dependencies]
+sdl2 = "0.36"
+
+[dev-dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

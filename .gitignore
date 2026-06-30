@@ -1,0 +1,28 @@
+# Rust build output
+/target
+
+# macOS
+.DS_Store
+
+# ---------------------------------------------------------------------------
+# Copyrighted material — NEVER commit these.
+# System ROMs (KERNAL/BASIC/CHARGEN) and any disk/tape/cartridge/program images
+# are copyrighted. Users must supply their own. See roms/README.md.
+# ---------------------------------------------------------------------------
+/roms/*
+!/roms/README.md
+/disks/*
+!/disks/README.md
+
+# Defence in depth: ignore these formats anywhere in the tree.
+*.bin
+*.d64
+*.d81
+*.t64
+*.tap
+*.prg
+*.crt
+*.g64
+*.zip
+
+# Note: Cargo.lock IS committed (this is an application, not a library).
