@@ -1,5 +1,7 @@
 # c64emu
 
+[![CI](https://github.com/abax1/c64emu/actions/workflows/ci.yml/badge.svg)](https://github.com/abax1/c64emu/actions/workflows/ci.yml)
+
 A Commodore 64 emulator written from scratch in Rust. It boots the real C64
 KERNAL/BASIC ROMs to the `READY.` prompt, renders VIC-II graphics (text, bitmap,
 and sprites), produces SID audio, takes keyboard and joystick input, and loads
